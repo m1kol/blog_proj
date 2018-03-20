@@ -8,7 +8,9 @@ class Post(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL, related_name="posts",
                                verbose_name="Author",
                                on_delete=models.CASCADE)
-    categories = models.ManyToManyField(Category, verbose_name="Categories")
+    categories = models.ManyToManyField(Category,
+                                        verbose_name="Categories",
+                                        related_name="categories")
     title = models.CharField(max_length=255, null=False, verbose_name="Title")
     text = models.TextField(blank=False, verbose_name="Content")
     likes_count = models.PositiveIntegerField(default=0, verbose_name="Number of likes")
