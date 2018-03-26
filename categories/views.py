@@ -1,13 +1,26 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+from django.shortcuts import render, get_object_or_404
+from categories.models import Category
+from post.models import Post
 
 
-def list(request):
+def list_categories(request):
 
-    return HttpResponse("List of the categories.")
+    categories = Category.objects.all()
+    context = {
+        "categories": categories,
+    }
+
+    return render(request, "categories/list_categories.html", context)
 
 
-def detail(request, category_id):
+def category_detail(request, category_id):
 
-    return HttpResponse("Detail (list of posts) of category %d" % category_id)
+    category = get_object_or_404(Category, id=category_id)
+    posts = Post.objects.all().filter(id=category_id)
+    context = {
+        "category": category,
+        "posts": posts
+    }
+
+    return render(request, "categories/category_detail.html", context)
 

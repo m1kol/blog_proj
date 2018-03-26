@@ -1,13 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-<header>This is header.</header>
+<header>
+    <a href="{% url "posts:list_posts" %}">Posts</a>
+    <a href="{% url "categories:list_categories" %}">Categories</a>
+    <a href="{% url "core:profile_page" user.id %}">Profile</a>
+</header>
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
-    <div>{% block content %}{% endblock %}</div>
+    <h4></h4>
+    {% block content %}{% endblock %}
 </body>
 
-<footer>This is footer.</footer>
+<footer><strong>COPYRIGHT@misha's website</strong></footer>
 </html>

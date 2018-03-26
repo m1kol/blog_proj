@@ -1,0 +1,9 @@
+{% extends "core/base.html" %}
+
+{% block title %}{{ post }}{% endblock %} {# post name here #}
+
+{% block content %}
+    <h1>{{ post.title }}</h1>
+    <div>{{ post.text }}</div>
+    <h4>Author: <a href="{% url "core:profile_page" post.author.id %}">{{ post.author }}</a></h4>
+{% endblock %} {# post content here: title, text, comments#}

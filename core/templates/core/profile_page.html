@@ -1,0 +1,14 @@
+{% extends "core/base.html" %}
+
+{% block title %}Profile page{% endblock %}
+{% block content %}
+    <div><strong>Username:</strong> {{ user }}</div>
+    <div><strong>Name:</strong>{{ user.first_name }} {{ user.last_name }}</div>
+    <div><strong>Posts:</strong>
+    {% for post in posts %}
+        <li>
+            <a href="{% url "posts:show_post" post.id %}">{{ post }}</a>
+        </li>
+    {% endfor %}
+    </div>
+{% endblock %}

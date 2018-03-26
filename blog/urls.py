@@ -15,6 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf import settings
 
 import categories.urls
 import post.urls
@@ -22,7 +23,14 @@ import core.urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('categories/', include(categories.urls)),
-    path('posts/', include(post.urls)),
-    path('', include(core.urls)),
+    path('categories/', include(categories.urls, namespace='categories')),
+    path('posts/', include(post.urls, namespace='posts')),
+    path('', include(core.urls, namespace='core')),
 ]
+
+# code for a django debug toolbar
+if settings.DEBUG:
+    import debug_toolbar
+    urlpatterns = [
+        path('debug/', include(debug_toolbar.urls)),
+    ] + urlpatterns
