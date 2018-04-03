@@ -1,0 +1,15 @@
+{% extends "core/base.html" %}
+
+{% block title %}Create Post{% endblock %}
+
+{% block content %}
+
+    <div>
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ form }}
+            <input type="submit" value="Create">
+        </form>
+    </div>
+
+{% endblock %}

@@ -24,7 +24,7 @@ import core.urls
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('categories/', include(categories.urls, namespace='categories')),
-    path('posts/', include(post.urls, namespace='posts')),
+    path('posts/', include(post.urls, namespace='post')),
     path('', include(core.urls, namespace='core')),
 ]
 

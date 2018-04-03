@@ -1,9 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <header>
-    <a href="{% url "posts:list_posts" %}">Posts</a>
+    <a href="{% url "post:list_posts" %}">Posts</a>
     <a href="{% url "categories:list_categories" %}">Categories</a>
-    <a href="{% url "core:profile_page" user.id %}">Profile</a>
+    {% if request.user.id != None %}
+        <a href="{% url "core:profile_page" request.user.id %}">{{ request.user }}</a>
+        <a href="{% url "core:logout" %}">Logout</a>
+    {% else %}
+        <a href="{% url "core:login_page" %}">Login</a>
+    {% endif %}
 </header>
 <head>
     <meta charset="UTF-8">

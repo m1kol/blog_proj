@@ -3,6 +3,10 @@
 {% block title %}{{ post }}{% endblock %} {# post name here #}
 
 {% block content %}
+    <h5>{% for category in categories%}
+        <a href="{% url "categories:category_detail" category.pk %}">{{ category }}</a>
+    {% endfor %}</h5>
+{#    <div><a href="{% url "post:edit_post" %}"></a></div>#}
     <h1>{{ post.title }}</h1>
     <div>{{ post.text }}</div>
     <h4>Author: <a href="{% url "core:profile_page" post.author.id %}">{{ post.author }}</a></h4>
