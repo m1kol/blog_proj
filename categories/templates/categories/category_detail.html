@@ -6,7 +6,7 @@
     <h1>{{ category }}</h1>
     <div>
         {% for post in posts %}
-            <li><a href="{% url "posts:show_post" post.id %}" >{{ post }}</a></li>
+            <li><a href="{% url "post:show_post" post.id %}" >{{ post }}</a></li>
         {% endfor %}
 
     </div>
