@@ -1,3 +1,8 @@
-from django.shortcuts import render
+from django.views import generic
+from .models import Like
 
-# Create your views here.
+
+class LikeCreate(generic.CreateView):
+
+    model = Like
+    fields = ()

@@ -9,7 +9,8 @@
     {% if request.user == post.author%}
         <div><a href="{% url "post:edit_post" post_id=post.pk %}">Edit post</a></div>
     {% endif %}
+    <h4>Author: <a href="{% url "core:profile_page" post.author.id %}">{{ post.author }}</a></h4>
     <h1>{{ post.title }}</h1>
     <div>{{ post.text }}</div>
-    <h4>Author: <a href="{% url "core:profile_page" post.author.id %}">{{ post.author }}</a></h4>
+{#    <div><a href="{% url "comment:comment_create" %}">Comment post</a></div>#}
 {% endblock %} {# post content here: title, text, comments#}

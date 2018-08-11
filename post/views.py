@@ -17,8 +17,7 @@ class PostDetail(generic.DetailView):
     def get_context_data(self, **kwargs):
         context = super(PostDetail, self).get_context_data()
         categories = Category.objects.all().filter(id=kwargs["object"].pk)
-        if categories.__len__() != 0:
-            context['categories'] = categories
+        context['categories'] = categories
         return context
 
 
@@ -61,15 +60,21 @@ class PostCreate(generic.CreateView):
     model = Post
     fields = ('title', 'text', 'categories', )
     template_name = 'post/post_create.html'
+    context_object_name = 'category'
 
     def get_success_url(self):
-        return reverse('post:show_post', kwargs={'pk': self.object.pk})
+        return reverse('post:show_post', kwargs={'post_id': self.object.pk})
 
     def form_valid(self, form):
         self.object = form.save(commit=False)
         self.object.author = self.request.user
         self.object.save()
         return super().form_valid(form)
+
+    def get_form(self, **kwargs):
+        form = super(PostCreate, self).get_form(**kwargs)
+        form.fields['categories'].required = False
+        return form
 
 
 class PostEdit(generic.UpdateView):
@@ -80,4 +85,9 @@ class PostEdit(generic.UpdateView):
     pk_url_kwarg = 'post_id'
 
     def get_success_url(self):
-        return reverse('post:show_post', kwargs={'pk': self.object.pk})
+        return reverse('post:show_post', kwargs={'post_id': self.object.pk})
+
+    def get_form(self, **kwargs):
+        form = super(PostEdit, self).get_form(**kwargs)
+        form.fields['categories'].required = False
+        return form
